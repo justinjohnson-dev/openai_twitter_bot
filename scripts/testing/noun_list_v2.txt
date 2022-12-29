@@ -1,0 +1,4 @@
+truck
+gorilla
+phone
+car
