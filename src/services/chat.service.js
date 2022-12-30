@@ -4,7 +4,7 @@ const { findNounToTweet, updateNounStatus } = require('./findNounToTweet');
 require('dotenv').config();
 
 const configuration = new Configuration({
-  organization: 'org-Kz014NLEGjHIxLXvzYHle5YB',
+  organization: process.env.organization,
   apiKey: process.env.openAIAPIKey,
 });
 
