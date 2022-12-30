@@ -13,7 +13,6 @@ const openai = new OpenAIApi(configuration);
 async function sendTweet() {
   const value = findNounToTweet();
 
-  // logic to get noun from json file
   const message = value;
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
