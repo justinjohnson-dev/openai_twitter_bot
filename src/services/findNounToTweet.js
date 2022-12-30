@@ -1,4 +1,6 @@
 const fs = require('fs');
+const AWS = require('aws-sdk');
+require('dotenv').config();
 
 function findNounToTweet() {
   try {
@@ -48,6 +50,40 @@ function updateNounStatus(noun) {
     if (err) throw err;
     console.log('completed writing to file.');
   });
+
+  writeUpdatedFileToS3Bucket(file);
+}
+
+function writeUpdatedFileToS3Bucket(file) {
+  const ID = process.env.awsAccessKey;
+  const SECRET = process.env.awsAccessSecret;
+
+  const BUCKET_NAME = 'twitter-openai-bot';
+
+  const s3 = new AWS.S3({
+    accessKeyId: ID,
+    secretAccessKey: SECRET,
+  });
+
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  const timestamp =
+    date.getHours() + '-' + date.getMinutes() + '-' + date.getSeconds();
+
+  // Uploading files to the bucket
+  s3.putObject(
+    {
+      Bucket: BUCKET_NAME,
+      Key: `${year}/${month}/${day}/${timestamp}/nouns.json`,
+      Body: JSON.stringify(file),
+      ContentType: 'application/json',
+    },
+    function (err, data) {
+      console.log(JSON.stringify(err) + ' ' + JSON.stringify(data));
+    },
+  );
 }
 
 module.exports = {
