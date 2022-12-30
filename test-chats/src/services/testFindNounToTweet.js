@@ -1,10 +1,11 @@
 const fs = require('fs');
+const { resolve } = require('path');
 const AWS = require('aws-sdk');
 require('dotenv').config();
 
 function findNounToTweet() {
   try {
-    const config = require('J:\\Dev\\jj_dev_twitter_bot\\scripts\\testing.json');
+    const config = require(resolve('scripts/testing.json'));
     const length_of_keys = Object.keys(config).length;
 
     let value = findRandomNumber(config, length_of_keys);
@@ -41,7 +42,7 @@ function getRandomInt(max) {
 }
 
 function updateNounStatus(noun) {
-  const fileName = 'J:\\Dev\\jj_dev_twitter_bot\\scripts\\testing.json';
+  const fileName = resolve('scripts/testing.json');
   const file = require(fileName);
 
   file[noun] = true;
