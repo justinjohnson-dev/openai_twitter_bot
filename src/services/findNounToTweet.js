@@ -5,7 +5,7 @@ require('dotenv').config();
 
 function findNounToTweet() {
   try {
-    const config = require(resolve('scripts/testing.json'));
+    const config = require(resolve('scripts/nouns.json'));
     const length_of_keys = Object.keys(config).length;
 
     let value = findRandomNumber(config, length_of_keys);
@@ -42,7 +42,7 @@ function getRandomInt(max) {
 }
 
 function updateNounStatus(noun) {
-  const fileName = resolve('scripts/testing.json');
+  const fileName = resolve('scripts/nouns.json');
   const file = require(fileName);
 
   file[noun] = true;
