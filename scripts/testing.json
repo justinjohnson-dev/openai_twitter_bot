@@ -1,1 +1,23 @@
-{ "car": false, "truck": false }
+{
+  "car": false,
+  "truck": false,
+  "people": false,
+  "history": false,
+  "way": false,
+  "art": false,
+  "world": false,
+  "information": false,
+  "map": false,
+  "two": false,
+  "family": false,
+  "government": false,
+  "health": false,
+  "system": false,
+  "computer": false,
+  "meat": false,
+  "year": false,
+  "thanks": false,
+  "music": false,
+  "person": false,
+  "reading": false
+}
