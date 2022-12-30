@@ -23,7 +23,7 @@ async function sendTweet() {
     temperature: 0,
   });
 
-  console.log(response.data);
+  // console.log(response.data);
   if (response.data) {
     if (response.data.choices) {
       tweet(`Noun: ${message}` + response.data.choices[0].text);

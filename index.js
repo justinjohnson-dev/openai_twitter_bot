@@ -19,10 +19,10 @@ app.use((err, req, res, next) => {
 });
 
 // Schedule tasks to be run on the server.
-// cron.schedule('* * * * *', function () {
-//   sendTweet();
-// });
+cron.schedule('0 */2 * * *', function () {
+  sendTweet();
+});
 
 // NEED TO CREATE CONDITION TO TEXT/EMAIL ME IF WE RUN OUT OF WORDS
 // IN THE FUTURE - OR BUILD SOMETHING TO AUTO CREATE MORE
-sendTweet();
+// sendTweet();
