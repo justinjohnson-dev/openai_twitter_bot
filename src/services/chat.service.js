@@ -26,7 +26,11 @@ async function sendTweet() {
   // console.log(response.data);
   if (response.data) {
     if (response.data.choices) {
-      tweet(`Noun: ${message}` + response.data.choices[0].text);
+      tweet(
+        `Noun: ${message}` +
+          response.data.choices[0].text +
+          '\n\n #innovation #chatgpt #openai #programming',
+      );
       updateNounStatus(value);
 
       return 200;

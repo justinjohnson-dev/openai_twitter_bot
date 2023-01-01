@@ -1,5 +1,6 @@
 const { Configuration, OpenAIApi } = require('openai');
 const { findNounToTweet, updateNounStatus } = require('./testFindNounToTweet');
+const { tweet } = require('../../../src/services/sendTweet');
 require('dotenv').config();
 
 const configuration = new Configuration({
@@ -25,7 +26,11 @@ async function testSystem() {
   console.log(response.data);
   if (response.data) {
     if (response.data.choices) {
-      // tweet(`Noun: ${message}` + response.data.choices[0].text);
+      tweet(
+        `Noun: ${message}` +
+          response.data.choices[0].text +
+          '\n\n #innovation #chatgpt #openai #programming',
+      );
       updateNounStatus(value);
 
       return 200;
