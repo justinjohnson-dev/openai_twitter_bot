@@ -71,7 +71,7 @@ function writeUpdatedFileToS3Bucket(file) {
   const month = date.getMonth() + 1;
   const day = date.getDate();
   const timestamp =
-    date.getHours() + '-' + date.getMinutes() + '-' + date.getSeconds();
+    date.getHours() + ':' + date.getMinutes() + ':' + date.getSeconds();
 
   // Uploading files to the bucket
   s3.putObject(
@@ -83,7 +83,7 @@ function writeUpdatedFileToS3Bucket(file) {
     },
     function (err, data) {
       console.log(JSON.stringify(err) + ' ' + JSON.stringify(data));
-    },
+    }
   );
 }
 
