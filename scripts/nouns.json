@@ -13,7 +13,7 @@
   "system": false,
   "computer": true,
   "meat": false,
-  "year": false,
+  "year": true,
   "thanks": false,
   "music": false,
   "person": false,
