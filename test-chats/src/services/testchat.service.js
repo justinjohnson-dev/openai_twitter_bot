@@ -29,7 +29,7 @@ async function testSystem() {
       tweet(
         `Noun: ${message}` +
           response.data.choices[0].text +
-          '\n\n #innovation #chatgpt #openai #programming',
+          '\n\n\n #technology #innovation #chatGPT #openai #programming'
       );
       updateNounStatus(value);
 
