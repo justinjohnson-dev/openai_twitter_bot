@@ -1,10 +1,10 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+const express = require("express");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const app = express();
-const cron = require('node-cron');
-const { sendTweet } = require('./src/services/chat.service');
-require('dotenv').config();
+const cron = require("node-cron");
+const { sendTweet } = require("./src/services/chat.service");
+require("dotenv").config();
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -19,7 +19,7 @@ app.use((err, req, res, next) => {
 });
 
 // Schedule tasks to be run on the server.
-cron.schedule('0 */2 * * *', function () {
+cron.schedule("0 */2 * * *", function () {
   sendTweet();
 });
 
