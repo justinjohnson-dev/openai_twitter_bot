@@ -12,14 +12,13 @@ const openai = new OpenAIApi(configuration);
 
 async function sendTweet() {
   try {
-    const value = findNounToTweet();
+    const messageValue = findNounToTweet();
 
-    const message = value;
     const response = await openai.createCompletion({
       model: "text-davinci-003",
       prompt: `Pretend you are a comedian. Answer as funny as possible. Answer hilariously.
-              What is a ${message}?`,
-      max_tokens: 100,
+              What is a ${messageValue}?`,
+      max_tokens: 90,
       temperature: 0,
     });
 
@@ -28,11 +27,11 @@ async function sendTweet() {
     if (!firstChoice) throw "no choices returned";
 
     tweet(
-      `Noun: ${message}` +
+      `Noun: ${messageValue}` +
         firstChoice.text +
         "\n\n\n #technology #innovation #chatGPT #openai #programming",
     );
-    updateNounStatus(value);
+    updateNounStatus(messageValue);
 
     return 200;
   } catch (error) {
