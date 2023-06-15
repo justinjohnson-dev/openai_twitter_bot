@@ -10,6 +10,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+// TODO: refactor to wrap around try/catch and avoid nested conditional
 async function sendTweet() {
   const value = findNounToTweet();
 
