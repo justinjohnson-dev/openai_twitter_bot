@@ -1,7 +1,7 @@
-const { Configuration, OpenAIApi } = require('openai');
-const { findNounToTweet, updateNounStatus } = require('./testFindNounToTweet');
-const { tweet } = require('../../../src/services/sendTweet');
-require('dotenv').config();
+const { Configuration, OpenAIApi } = require("openai");
+const { findNounToTweet, updateNounStatus } = require("./testFindNounToTweet");
+const { tweet } = require("../../../src/services/sendTweet");
+require("dotenv").config();
 
 const configuration = new Configuration({
   organization: process.env.organization,
@@ -11,30 +11,35 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 async function testSystem() {
-  const value = findNounToTweet();
+  try {
+    const value = findNounToTweet();
 
-  // logic to get noun from json file
-  const message = value;
-  const response = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `Pretend you are a comedian. Answer as funny as possible. Answer hilariously.
-  What is a ${message}?`,
-    max_tokens: 100,
-    temperature: 0,
-  });
+    const message = value;
+    const response = await openai.createCompletion({
+      model: "text-davinci-003",
+      prompt: `Pretend you are a comedian. Answer as funny as possible. Answer hilariously.
+              What is a ${message}?`,
+      max_tokens: 100,
+      temperature: 0,
+    });
 
-  console.log(response.data);
-  if (response.data) {
-    if (response.data.choices) {
-      tweet(
-        `Noun: ${message}` +
-          response.data.choices[0].text +
-          '\n\n\n #technology #innovation #chatGPT #openai #programming'
-      );
-      updateNounStatus(value);
+    const firstChoice = response.data.choices[0];
 
-      return 200;
-    }
+    if (!firstChoice) throw "no choices returned";
+
+    console.log(firstChoice);
+
+    tweet(
+      `Noun: ${message}` +
+        firstChoice.text +
+        "\n\n\n #technology #innovation #chatGPT #openai #programming",
+    );
+    updateNounStatus(value);
+
+    return 200;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
